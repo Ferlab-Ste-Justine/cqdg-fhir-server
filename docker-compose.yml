@@ -2,22 +2,28 @@ version: "3"
 services:
   hapi-fhir-jpaserver-start:
     build: .
-    container_name: hapi-fhir-jpaserver-start
+    container_name: hapi-fhir-server
     restart: on-failure
+    environment:
+      datasource.driver: "org.postgresql.Driver"
+      datasource.url: "jdbc:postgresql://hapi-fhir-postgres:5432/hapi"
+      hibernate.dialect: "org.hibernate.dialect.PostgreSQL95Dialect"
+      datasource.username: "admin"
+      datasource.password: "admin"
     ports:
       - "8080:8080"
-  hapi-fhir-mysql:
-    image: mysql:latest
-    container_name: hapi-fhir-mysql
-    #https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html
-    command: --lower_case_table_names=1
+  hapi-fhir-postgres:
+    image: postgres:latest
+    container_name: hapi-fhir-postgres
     restart: always
+    ports:
+      - "5432:5432"
     environment:
-      MYSQL_DATABASE: 'hapi'
-      MYSQL_USER: 'admin'
-      MYSQL_PASSWORD: 'admin'
-      MYSQL_ROOT_PASSWORD: 'admin'
+      POSTGRES_DB: 'hapi'
+      POSTGRES_USER: 'admin'
+      POSTGRES_PASSWORD: 'admin'
     volumes:
-      - hapi-fhir-mysql:/var/lib/mysql
+      - hapi-fhir-postgres:/var/lib/postgresql/data
+      - "./backup:/root/backup"
 volumes:
-  hapi-fhir-mysql:
+  hapi-fhir-postgres:
