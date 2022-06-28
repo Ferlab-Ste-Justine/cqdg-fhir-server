@@ -190,3 +190,34 @@ hapi:
 #  protocol: 'http'
 #  schema_management_strategy: CREATE
 #  username: SomeUsername
+
+bio:
+  service-request-routing:
+    enabled: false
+  nanuq:
+    enabled: false
+    analyses-index: "analyses"
+    sequencings-index: "sequencings"
+  tagging:
+    enabled: true
+    queryParam: true
+  elasticsearch:
+    host: "elasticsearch-workers"
+    port: 9200
+    scheme: "http"
+    patients-index: "patients"
+    prescriptions-index: "prescriptions"
+    enabled: true
+  auth:
+    server-url: https://auth.qa.cqdg.ferlab.bio/auth
+    realm: clin
+    retry: 5
+    leeway: 30
+    disable-ssl-validation: true
+    enabled: true
+    authorization:
+      enabled: true
+      client-id: clin-acl
+      system-id: clin-system
+  audits:
+    enabled: true
