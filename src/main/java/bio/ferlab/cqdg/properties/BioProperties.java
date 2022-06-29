@@ -30,7 +30,7 @@ public class BioProperties {
     private final boolean isAuthorizationEnabled;
     private final String authClientId;
     private final String authSystemId;
-    private final String authClientSecret;
+//    private final String authClientSecret;
     private final boolean isNanuqEnabled;
     private final String nanuqEsAnalysesIndex;
     private final String nanuqEsSequencingsIndex;
@@ -54,7 +54,7 @@ public class BioProperties {
             @Value("${bio.auth.authorization.enabled}") boolean isAuthorizationEnabled,
             @Value("${bio.service-request-routing.enabled}") boolean isServiceRequestRoutingEnabled,
             @Value("${bio.auth.authorization.client-id}") String authClientId,
-            @Value("${bio.auth.authorization.client-secret}") String authClientSecret,
+//            @Value("${bio.auth.authorization.client-secret}") String authClientSecret,
             @Value("${bio.auth.authorization.system-id}") String authSystemId,
             @Value("${bio.nanuq.enabled}") boolean isNanuqEnabled,
             @Value("${bio.nanuq.analyses-index}") String nanuqEsAnalysesIndex,
@@ -78,7 +78,7 @@ public class BioProperties {
         this.isTaggingQueryParam = isTaggingQueryParam;
         this.isAuthorizationEnabled = isAuthorizationEnabled;
         this.authClientId = authClientId;
-        this.authClientSecret = authClientSecret;
+//        this.authClientSecret = authClientSecret;
         this.authSystemId = authSystemId;
         this.isNanuqEnabled = isNanuqEnabled;
         this.nanuqEsAnalysesIndex = nanuqEsAnalysesIndex;

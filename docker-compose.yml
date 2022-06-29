@@ -6,7 +6,7 @@ services:
     restart: on-failure
     environment:
       datasource.driver: "org.postgresql.Driver"
-      datasource.url: "jdbc:postgresql://hapi-fhir-postgres-cqdg:5432/hapi"
+      datasource.url: "jdbc:postgresql://hapi-fhir-postgres-cqdg:5555/hapi"
       hibernate.dialect: "org.hibernate.dialect.PostgreSQL95Dialect"
       datasource.username: "admin"
       datasource.password: "admin"
@@ -17,7 +17,7 @@ services:
     container_name: hapi-fhir-postgres-cqdg
     restart: always
     ports:
-      - "5432:5432"
+      - "5555:5432"
     environment:
       POSTGRES_DB: 'hapi'
       POSTGRES_USER: 'admin'
