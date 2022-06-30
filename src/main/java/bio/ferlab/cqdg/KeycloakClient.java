@@ -51,7 +51,7 @@ public class KeycloakClient {
 			configuration.setRealm(bioProperties.getAuthRealm());
 			configuration.setAuthServerUrl(bioProperties.getAuthServerUrl());
 			configuration.setResource(bioProperties.getAuthClientId());
-//			configuration.getCredentials().put(AUTH_CLIENT_SECRET_KEY, bioProperties.getAuthClientSecret());
+			configuration.getCredentials().put(AUTH_CLIENT_SECRET_KEY, bioProperties.getAuthClientSecret());
 			this.authzClient = AuthzClient.create(configuration);
 			return this.authzClient;
 		} catch (Exception e) {

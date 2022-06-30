@@ -25,38 +25,39 @@ import java.util.Locale;
 
 @Component
 public class TokenDecoder {
-    private static final Logger log = LoggerFactory.getLogger(TokenDecoder.class);
-    
-    private final JwkProviderService provider;
-    private final BioProperties bioProperties;
+	private static final Logger log = LoggerFactory.getLogger(TokenDecoder.class);
 
-    public TokenDecoder(JwkProviderService jwkProviderService, BioProperties bioProperties) {
-        this.provider = jwkProviderService;
-        this.bioProperties = bioProperties;
-    }
+	private final JwkProviderService provider;
+	private final BioProperties bioProperties;
 
-    public RequesterData decode(String authorization, Locale locale) {
-        try {
-            final var accessToken = Helpers.extractAccessTokenFromBearer(authorization);
-            final DecodedJWT decodedJWT = JWT.decode(accessToken);
-            ServiceContext.build(decodedJWT.getSubject(), locale);
+	public TokenDecoder(JwkProviderService jwkProviderService, BioProperties bioProperties) {
+		this.provider = jwkProviderService;
+		this.bioProperties = bioProperties;
+	}
 
-            final Jwk jwk = provider.get(decodedJWT.getKeyId());
-            final Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
-            final Verification verifier = JWT.require(algorithm);
+	public RequesterData decode(String authorization, Locale locale) {
+		try {
+			final var accessToken = Helpers.extractAccessTokenFromBearer(authorization);
+			final DecodedJWT decodedJWT = JWT.decode(accessToken);
+			ServiceContext.build(decodedJWT.getSubject(), locale);
 
-            verifier.acceptLeeway(bioProperties.getAuthLeeway()).build().verify(decodedJWT);
-            final String decodedBody = new String(new Base64(true).decode(decodedJWT.getPayload()));
-            return new ObjectMapper().readValue(decodedBody, RequesterData.class);
-        } catch (JwkException e) {
-            log.error("Failed to decode token", e);
-            throw new RptIntrospectionException("token from another provider");
-        } catch (JWTDecodeException | JsonProcessingException e) {
-            log.error("Failed to decode token", e);
-            throw new RptIntrospectionException("malformed token");
-        } catch (JWTVerificationException e) {
-            log.error("Failed to decode token", e);
-            throw new RptIntrospectionException("token is expired");
-        }
-    }
+			final Jwk jwk = provider.get(decodedJWT.getKeyId());
+
+			final Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
+			final Verification verifier = JWT.require(algorithm);
+
+			verifier.acceptLeeway(bioProperties.getAuthLeeway()).build().verify(decodedJWT);
+			final String decodedBody = new String(new Base64(true).decode(decodedJWT.getPayload()));
+			return new ObjectMapper().readValue(decodedBody, RequesterData.class);
+		} catch (JwkException e) {
+			log.error("Failed to decode token", e);
+			throw new RptIntrospectionException("token from another provider");
+		} catch (JWTDecodeException | JsonProcessingException e) {
+			log.error("Failed to decode token", e);
+			throw new RptIntrospectionException("malformed token");
+		} catch (JWTVerificationException e) {
+			log.error("Failed to decode token", e);
+			throw new RptIntrospectionException("token is expired");
+		}
+	}
 }

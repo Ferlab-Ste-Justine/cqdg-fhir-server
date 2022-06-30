@@ -206,7 +206,7 @@ bio:
     prescriptions-index: "prescriptions"
     enabled: true
   auth:
-    server-url: https://localhost:8090
+    server-url: http://localhost:8090/auth
     realm: cqdg
     retry: 5
     leeway: 30
@@ -214,7 +214,7 @@ bio:
     enabled: true
     authorization:
       enabled: true
-      client-id: clin-acl
-      system-id: clin-system
+      client-id: cqdg-acl
+#      system-id: clin-system
   audits:
     enabled: true
