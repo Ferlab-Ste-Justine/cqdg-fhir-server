@@ -187,7 +187,6 @@ hapi:
 #  schema_management_strategy: CREATE
 #  username: SomeUsername
 
-#    server-url: https://auth.qa.cqdg.ferlab.bio/auth
 bio:
   service-request-routing:
     enabled: false
@@ -206,8 +205,8 @@ bio:
     prescriptions-index: "prescriptions"
     enabled: true
   auth:
-    server-url: http://localhost:8090/auth
-    realm: cqdg
+    server-url: https://auth.qa.cqdg.ferlab.bio/auth
+    realm: CQDG
     retry: 5
     leeway: 30
     disable-ssl-validation: true
