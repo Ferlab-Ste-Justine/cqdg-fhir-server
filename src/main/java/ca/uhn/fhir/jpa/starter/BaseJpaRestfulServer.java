@@ -1,6 +1,8 @@
 package ca.uhn.fhir.jpa.starter;
 
 import bio.ferlab.cqdg.interceptors.AccessTokenInterceptor;
+import bio.ferlab.cqdg.interceptors.BioAuthInterceptor;
+import bio.ferlab.cqdg.properties.BioProperties;
 import ca.uhn.fhir.batch2.jobs.reindex.ReindexProvider;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
@@ -88,6 +90,13 @@ public class BaseJpaRestfulServer extends RestfulServer {
 
 	@Autowired
 	ReindexProvider reindexProvider;
+
+	@Autowired
+	BioProperties bioProperties;
+
+	@Autowired
+	BioAuthInterceptor bioAuthInterceptor;
+
 	@Autowired
 	BinaryStorageInterceptor binaryStorageInterceptor;
 	@Autowired
@@ -412,7 +421,13 @@ public class BaseJpaRestfulServer extends RestfulServer {
 			daoConfig.setLastNEnabled(true);
 		}
 
-		registerInterceptor(accessTokenInterceptor);
+//		if (bioProperties.isAuthEnabled()) {
+//			registerInterceptor(accessTokenInterceptor);
+//		}
+
+//		if (bioProperties.isAuthorizationEnabled()) {
+//			registerInterceptor(bioAuthInterceptor);
+//		}
 
 		daoConfig.setStoreResourceInLuceneIndex(appProperties.getStore_resource_in_lucene_index_enabled());
 		daoConfig.getModelConfig().setNormalizedQuantitySearchLevel(appProperties.getNormalized_quantity_search_level());

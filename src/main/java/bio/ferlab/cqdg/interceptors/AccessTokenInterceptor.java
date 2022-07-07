@@ -23,7 +23,6 @@ public class AccessTokenInterceptor {
 
 	private final TokenDecoder decoder;
 
-	//
 	public AccessTokenInterceptor(BioProperties bioProperties, TokenDecoder decoder) {
 		if (bioProperties.isDisableSslValidation()) {
 			getDisabledSSLContext();
@@ -34,7 +33,6 @@ public class AccessTokenInterceptor {
 
 	@Hook(Pointcut.SERVER_INCOMING_REQUEST_PRE_PROCESSED)
 	public void validateToken(HttpServletRequest request, HttpServletResponse response) {
-
 		final var bearer = request.getHeader(HttpHeaders.AUTHORIZATION);
 		final var requesterData = decoder.decode(bearer, request.getLocale());
 		request.setAttribute(Constants.REQUESTER_DATA_KEY, requesterData);
