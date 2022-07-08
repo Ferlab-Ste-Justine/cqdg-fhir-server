@@ -1,4 +1,4 @@
-FROM maven:3.6.3-jdk-11-slim as build-hapi
+FROM maven:3.8-openjdk-17-slim as build-hapi
 
 WORKDIR /tmp/cqdg-fhir-server
 COPY . .
