@@ -421,13 +421,13 @@ public class BaseJpaRestfulServer extends RestfulServer {
 			daoConfig.setLastNEnabled(true);
 		}
 
-//		if (bioProperties.isAuthEnabled()) {
-//			registerInterceptor(accessTokenInterceptor);
-//		}
+		if (bioProperties.isAuthEnabled()) {
+			registerInterceptor(accessTokenInterceptor);
+		}
 
-//		if (bioProperties.isAuthorizationEnabled()) {
-//			registerInterceptor(bioAuthInterceptor);
-//		}
+		if (bioProperties.isAuthorizationEnabled()) {
+			registerInterceptor(bioAuthInterceptor);
+		}
 
 		daoConfig.setStoreResourceInLuceneIndex(appProperties.getStore_resource_in_lucene_index_enabled());
 		daoConfig.getModelConfig().setNormalizedQuantitySearchLevel(appProperties.getNormalized_quantity_search_level());
