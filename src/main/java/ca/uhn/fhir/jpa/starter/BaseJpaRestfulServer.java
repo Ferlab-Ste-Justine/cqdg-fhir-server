@@ -432,5 +432,8 @@ public class BaseJpaRestfulServer extends RestfulServer {
 		daoConfig.setStoreResourceInLuceneIndex(appProperties.getStore_resource_in_lucene_index_enabled());
 		daoConfig.getModelConfig().setNormalizedQuantitySearchLevel(appProperties.getNormalized_quantity_search_level());
 		daoConfig.getModelConfig().setIndexOnContainedResources(appProperties.getEnable_index_contained_resource());
+
+		// Auto add Coding.display if Coding.system/code is defined in the FHIR model
+		registerInterceptor(new ResponseTerminologyDisplayPopulationInterceptor(myValidationSupport));
 	}
 }
