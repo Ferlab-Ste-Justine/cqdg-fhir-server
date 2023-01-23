@@ -197,13 +197,6 @@ bio:
   tagging:
     enabled: true
     queryParam: true
-  elasticsearch:
-    host: "elasticsearch-workers"
-    port: 9200
-    scheme: "http"
-    patients-index: "patients"
-    prescriptions-index: "prescriptions"
-    enabled: true
   auth:
     server-url: https://auth.qa.cqdg.ferlab.bio/auth
     realm: CQDG
