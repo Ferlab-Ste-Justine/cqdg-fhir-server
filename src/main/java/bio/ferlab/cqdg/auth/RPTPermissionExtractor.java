@@ -25,6 +25,7 @@ public class RPTPermissionExtractor {
 		final var response = this.client.introspectRpt(rpt);
 
 		if (Optional.ofNullable(response.getPermissions()).isEmpty()) {
+			System.out.println("requestDetails is:" + requestDetails);
 			System.out.println("response is:" + response);
 			throw new RptIntrospectionException("rpt token is required");
 		}
