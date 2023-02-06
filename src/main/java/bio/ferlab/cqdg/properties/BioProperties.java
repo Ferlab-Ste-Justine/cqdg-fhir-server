@@ -13,6 +13,7 @@ import java.util.Optional;
 public class BioProperties {
     private final boolean isAuthEnabled;
     private final String authServerUrl;
+    private final String internalServerUrl;
     private final String authRealm;
     private final Integer authRetry;
     private final Long authLeeway;
@@ -26,12 +27,10 @@ public class BioProperties {
 //    private final String authSystemId;
     private final String authClientSecret;
     private final boolean isNanuqEnabled;
-    private final String nanuqEsAnalysesIndex;
-    private final String nanuqEsSequencingsIndex;
-
     public BioProperties(
             @Value("${bio.auth.enabled}") boolean isAuthEnabled,
             @Value("${bio.auth.server-url}") String authServerUrl,
+            @Value("${bio.auth.internal-server-url}") String internalServerUrl,
             @Value("${bio.auth.realm}") String authRealm,
             @Value("${bio.auth.retry}") Integer authRetry,
             @Value("${bio.auth.leeway}") Long authLeeway,
@@ -44,13 +43,12 @@ public class BioProperties {
             @Value("${bio.auth.authorization.client-id}") String authClientId,
             @Value("${bio.auth.authorization.client-secret}") String authClientSecret,
 //            @Value("${bio.auth.authorization.system-id}") String authSystemId,
-            @Value("${bio.nanuq.enabled}") boolean isNanuqEnabled,
-            @Value("${bio.nanuq.analyses-index}") String nanuqEsAnalysesIndex,
-            @Value("${bio.nanuq.sequencings-index}") String nanuqEsSequencingsIndex
+            @Value("${bio.nanuq.enabled}") boolean isNanuqEnabled
 
     ) {
         this.isAuthEnabled = isAuthEnabled;
         this.authServerUrl = authServerUrl;
+        this.internalServerUrl = internalServerUrl;
         this.authRealm = authRealm;
         this.authRetry = authRetry;
         this.authLeeway = Optional.ofNullable(authLeeway).orElse(0L);
@@ -63,10 +61,6 @@ public class BioProperties {
         this.authClientSecret = authClientSecret;
 //        this.authSystemId = authSystemId;
         this.isNanuqEnabled = isNanuqEnabled;
-        this.nanuqEsAnalysesIndex = nanuqEsAnalysesIndex;
-        this.nanuqEsSequencingsIndex = nanuqEsSequencingsIndex;
         this.isServiceRequestRoutingEnabled = isServiceRequestRoutingEnabled;
     }
-
-
 }

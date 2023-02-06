@@ -46,7 +46,8 @@ public class TokenDecoder {
 			final Algorithm algorithm = Algorithm.RSA256((RSAPublicKey) jwk.getPublicKey(), null);
 			final Verification verifier = JWT.require(algorithm);
 
-			verifier.acceptLeeway(bioProperties.getAuthLeeway()).build().verify(decodedJWT);
+			verifier.withIssuer(bioProperties.getAuthServerUrl() + "/realms/" + bioProperties.getAuthRealm(),
+				bioProperties.getInternalServerUrl() + "/realms/" + bioProperties.getAuthRealm()).acceptLeeway(bioProperties.getAuthLeeway()).build().verify(decodedJWT);
 			final String decodedBody = new String(new Base64(true).decode(decodedJWT.getPayload()));
 			return new ObjectMapper().readValue(decodedBody, RequesterData.class);
 		} catch (JwkException e) {
