@@ -192,13 +192,12 @@ bio:
     enabled: false
   nanuq:
     enabled: false
-    analyses-index: "analyses"
-    sequencings-index: "sequencings"
   tagging:
     enabled: true
     queryParam: true
   auth:
     server-url: https://auth.qa.cqdg.ferlab.bio/auth
+    internal-server-url: http://keycloak-http/auth
     realm: CQDG
     retry: 5
     leeway: 30
@@ -207,6 +206,5 @@ bio:
     authorization:
       enabled: true
       client-id: cqdg-acl
-#      system-id: clin-system
   audits:
     enabled: true
