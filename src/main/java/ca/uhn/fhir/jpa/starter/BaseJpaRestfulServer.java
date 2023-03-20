@@ -434,6 +434,6 @@ public class BaseJpaRestfulServer extends RestfulServer {
 		daoConfig.getModelConfig().setIndexOnContainedResources(appProperties.getEnable_index_contained_resource());
 
 		// Auto add Coding.display if Coding.system/code is defined in the FHIR model
-		registerInterceptor(new ResponseTerminologyDisplayPopulationInterceptor(myValidationSupport));
+		registerInterceptor(new CQDGResponseTerminologyDisplayPopulationInterceptor(myValidationSupport));
 	}
 }
