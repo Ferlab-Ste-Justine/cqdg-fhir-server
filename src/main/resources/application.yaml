@@ -197,7 +197,7 @@ bio:
     queryParam: true
   auth:
     server-url: https://auth.qa.cqdg.ferlab.bio/auth
-    internal-server-url: http://keycloak-http/auth
+    internal-server-url: http://keycloak-http
     realm: CQDG
     retry: 5
     leeway: 30
